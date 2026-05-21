@@ -1,0 +1,11 @@
+# This is a Node.js / Next.js app — pyproject.toml exists only to satisfy
+# the Keboola data-app golden-rule validator. There are no Python dependencies.
+[project]
+name = "meridian"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

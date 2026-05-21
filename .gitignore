@@ -1,5 +1,12 @@
-node_modules
-.next
+# Local dev artifacts — never commit
+/node_modules
+
+# Ignore the entire Next.js build tree EXCEPT the standalone bundle,
+# which is the Keboola deploy artifact and must be in git so the
+# container starts without a build step.
+/.next/*
+!/.next/standalone
+
 out
 build
 dist
