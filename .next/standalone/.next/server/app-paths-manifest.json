@@ -1,13 +1,13 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/icon.svg/route": "app/icon.svg/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/robots.txt/route": "app/robots.txt/route.js",
   "/page": "app/page.js",
   "/product/page": "app/product/page.js",
   "/manifesto/page": "app/manifesto/page.js",
   "/pricing/page": "app/pricing/page.js",
   "/signals/page": "app/signals/page.js",
-  "/styleguide/page": "app/styleguide/page.js",
-  "/styleguide/motion/page": "app/styleguide/motion/page.js"
+  "/styleguide/motion/page": "app/styleguide/motion/page.js",
+  "/styleguide/page": "app/styleguide/page.js"
 }

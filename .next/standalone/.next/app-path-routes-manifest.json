@@ -1,13 +1,13 @@
 {
   "/_not-found/page": "/_not-found",
-  "/sitemap.xml/route": "/sitemap.xml",
   "/icon.svg/route": "/icon.svg",
+  "/sitemap.xml/route": "/sitemap.xml",
   "/robots.txt/route": "/robots.txt",
   "/page": "/",
   "/product/page": "/product",
   "/manifesto/page": "/manifesto",
   "/pricing/page": "/pricing",
   "/signals/page": "/signals",
-  "/styleguide/page": "/styleguide",
-  "/styleguide/motion/page": "/styleguide/motion"
+  "/styleguide/motion/page": "/styleguide/motion",
+  "/styleguide/page": "/styleguide"
 }
