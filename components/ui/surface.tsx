@@ -1,24 +1,22 @@
 import { cn } from "@/lib/cn";
 
 export function Surface({
-  as: Tag = "div",
   className,
   grain = true,
   children,
   ...props
 }: {
-  as?: React.ElementType;
   className?: string;
   grain?: boolean;
   children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLElement>) {
+} & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <Tag
+    <div
       className={cn("surface", grain && "surface-grain", "p-6 md:p-8", className)}
       {...props}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
 
@@ -38,11 +36,9 @@ export function Hairline({ vertical = false, className }: { vertical?: boolean; 
 export function Eyebrow({
   children,
   className,
-  as: Tag = "span",
 }: {
   children: React.ReactNode;
   className?: string;
-  as?: React.ElementType;
 }) {
-  return <Tag className={cn("eyebrow", className)}>{children}</Tag>;
+  return <span className={cn("eyebrow", className)}>{children}</span>;
 }

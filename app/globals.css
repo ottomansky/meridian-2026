@@ -294,19 +294,28 @@
   }
 }
 
-/* Scroll-driven reveal — native CSS animation-timeline */
+/* Scroll-driven reveal — only when the browser supports animation-timeline.
+   Otherwise the children stay visible (no JS fallback yet — see Reveal.tsx). */
 @utility reveal {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  animation: reveal-in linear both;
-  animation-timeline: view();
-  animation-range: entry 5% cover 35%;
+  @supports (animation-timeline: view()) {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 35%;
+  }
 }
 @keyframes reveal-in {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
+}
+
+/* Cursor — hide the native cursor when our custom one is mounted */
+.meridian-no-native-cursor,
+.meridian-no-native-cursor * {
+  cursor: none !important;
 }
 
 /* Reduced-motion: kill all decorative animation, keep state transitions */

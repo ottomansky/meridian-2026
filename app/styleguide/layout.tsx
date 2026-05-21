@@ -6,8 +6,8 @@ const NAV = [
   { href: "/styleguide#color", label: "Color" },
   { href: "/styleguide#type", label: "Type" },
   { href: "/styleguide#spacing", label: "Spacing" },
-  { href: "/styleguide#motion", label: "Motion" },
   { href: "/styleguide#components", label: "Components" },
+  { href: "/styleguide/motion", label: "Motion ›" },
 ];
 
 export default function StyleguideLayout({ children }: { children: React.ReactNode }) {
