@@ -7,9 +7,12 @@
 /.next/*
 !/.next/standalone
 
-out
-build
-dist
+# Anchor these to the project root — without the leading slash they
+# match nested dirs (e.g. node_modules/next/dist/) and silently shred
+# the committed standalone bundle.
+/out
+/build
+/dist
 .env*
 !.env.example
 !.env.local.example

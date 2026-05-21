@@ -74,8 +74,10 @@ export function StickyWalkthrough() {
     <section
       ref={containerRef}
       data-step="0"
-      className="relative px-6 md:px-10 py-24 [--step-h:100svh]"
-      style={{ minHeight: reduced ? "auto" : `calc(var(--step-h) * ${STEPS.length})` }}
+      // On mobile the sticky left column stacks single-column anyway, so
+      // the 3-viewport-tall scrub gap is just wasted space. Only impose
+      // the long-scroll height on md+ where the pin actually pins.
+      className={`relative px-6 md:px-10 py-24 ${reduced ? "" : "md:min-h-[calc(100svh*3)]"}`}
     >
       {/* Scrolling tint */}
       <motion.div
@@ -110,7 +112,7 @@ export function StickyWalkthrough() {
         </div>
 
         {/* Scrolling RIGHT */}
-        <ol className="col-span-12 md:col-span-7 flex flex-col gap-32 md:gap-[60vh] list-none">
+        <ol className="col-span-12 md:col-span-7 flex flex-col gap-12 md:gap-[60vh] list-none">
           {STEPS.map((s, i) => (
             <li key={s.eyebrow} className="surface surface-grain p-8 md:p-10 flex flex-col gap-6">
               <header className="flex items-center justify-between">
@@ -148,9 +150,11 @@ export function StickyWalkthrough() {
 }
 
 function StickyContent({ progressIndex }: { progressIndex: MotionValue<number> }) {
-  const indexOpacity1 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [1, 0.6, 0.2, 0.2, 0.2]);
-  const indexOpacity2 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [0.2, 0.6, 1, 0.6, 0.2]);
-  const indexOpacity3 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [0.2, 0.2, 0.2, 0.6, 1]);
+  // Inactive stages stay at 0.55 so the mono labels keep AA contrast against
+  // the ink background. Lighthouse flagged 0.2 — too dim to be readable.
+  const indexOpacity1 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [1, 0.78, 0.55, 0.55, 0.55]);
+  const indexOpacity2 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [0.55, 0.78, 1, 0.78, 0.55]);
+  const indexOpacity3 = useTransform(progressIndex, [0, 0.5, 1, 1.5, 2], [0.55, 0.55, 0.55, 0.78, 1]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -175,13 +179,11 @@ function StickyContent({ progressIndex }: { progressIndex: MotionValue<number> }
             // biome-ignore lint/suspicious/noArrayIndexKey: static stages
             key={i}
             style={{ opacity }}
-            className="flex items-center gap-4 transition-colors"
+            className="flex items-center gap-4 transition-colors text-[color:var(--fg)]"
           >
-            <span className="font-mono text-xs text-[color:var(--fg-mute)] nums tracking-widest">
-              0{i + 1}
-            </span>
+            <span className="font-mono text-xs nums tracking-widest">0{i + 1}</span>
             <span className="flex-1 h-px bg-[color:var(--edge)]" aria-hidden />
-            <span className="font-mono text-xs uppercase tracking-widest text-[color:var(--fg)]">
+            <span className="font-mono text-xs uppercase tracking-widest">
               {STEPS[i]?.eyebrow.split(" · ")[1]}
             </span>
           </motion.li>

@@ -13,9 +13,23 @@
  */
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+
+function probeWebGL(): boolean {
+  if (typeof document === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    const ctx =
+      canvas.getContext("webgl2") ||
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl");
+    return Boolean(ctx);
+  } catch {
+    return false;
+  }
+}
 
 const VERT = /* glsl */ `
   varying vec2 vUv;
@@ -183,8 +197,13 @@ type Props = {
 
 export function ShaderBackground({ className, intensity = 1 }: Props) {
   const reduced = usePrefersReducedMotion();
+  // Probe WebGL after mount; headless / sandboxed Chrome (Lighthouse,
+  // print-to-PDF) has no GL context and would throw inside R3F. Falling
+  // back to the static gradient keeps the page silent.
+  const [hasWebGL, setHasWebGL] = useState(true);
+  useEffect(() => setHasWebGL(probeWebGL()), []);
 
-  if (reduced) {
+  if (reduced || !hasWebGL) {
     return (
       <div
         aria-hidden
