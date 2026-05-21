@@ -1,9 +1,9 @@
 {
   "/_not-found/page": "/_not-found",
   "/page": "/",
-  "/pricing/page": "/pricing",
   "/product/page": "/product",
   "/manifesto/page": "/manifesto",
+  "/pricing/page": "/pricing",
   "/signals/page": "/signals",
   "/styleguide/motion/page": "/styleguide/motion",
   "/styleguide/page": "/styleguide"

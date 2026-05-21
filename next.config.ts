@@ -12,7 +12,10 @@ const config: NextConfig = {
   poweredByHeader: false,
   compress: true,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // No sharp at runtime — the deploy container is Linux/amd64 and we
+    // build node_modules locally; shipping mac binaries breaks startup.
+    // We don't use next/image with optimization yet anyway.
+    unoptimized: true,
   },
 };
 

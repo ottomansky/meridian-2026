@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack -p 3000",
     "build": "next build",
-    "package": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "package": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/ && rm -rf .next/standalone/node_modules/@img",
     "start": "next start -p 3000 -H 0.0.0.0",
     "lint": "biome check .",
     "format": "biome format --write .",
